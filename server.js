@@ -28,16 +28,18 @@ app.post("/chat", async (req, res) => {
       });
     }
 	 const contextPrompt = `You are Caligo AI, a friendly assistant for someone with memory difficulties.
+Use short, simple sentences and a warm, patient tone. Keep your answer to 2 to 3 sentences.
+You are not a doctor: do not diagnose or change medication.
+
 User info:
-- Name: ${userData.name}
-- Age: ${userData.age}
-- Sleep per day: ${userData.sleep}
-- Diet: ${userData.diet}
-- Allergies: ${userData.allergies}
-- Emergency contact: ${userData.emergency}
+- Name: ${userData.name || "unknown"}
+- Age: ${userData.age || "unknown"}
+- Sleep per day: ${userData.sleep || "unknown"} hours
+- Symptoms: ${userData.symptoms || "none listed"}
+- Diet: ${userData.diet || "none listed"}
+- Allergies: ${userData.allergies || "none listed"}
 
 Respond warmly and helpfully to this message from the user: "${message}"`;
-
     console.log("User said:", message);
 
     const interaction = await ai.interactions.create({
